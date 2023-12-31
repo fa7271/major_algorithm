@@ -18,17 +18,20 @@ public class BFSListGraph {
             graph.get(node[0]).add(node[1]);
             graph.get(node[1]).add(node[0]);
         }
-        bfs(0);
-        System.out.println(Arrays.toString(dist));
+        System.out.println(bfs(0, 3));
+
     }
 
-    static void bfs(int node) {
+    static int bfs(int node, int target) {
         Queue<Integer> Q = new LinkedList<>();
         Q.add(0);
         visited[0] = true;
         while (!Q.isEmpty()) {
             int dx = Q.poll();
-            System.out.println(dx + " ");
+            if (dx == target) {
+                return dist[dx];
+
+            }
             for (int nx : graph.get(dx)) {
                 if (!visited[nx]) {
                     visited[nx] = true;
@@ -37,5 +40,6 @@ public class BFSListGraph {
                 }
             }
         }
+        return -1;
     }
 }
